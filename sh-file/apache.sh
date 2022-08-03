@@ -45,3 +45,11 @@ mysql -uadmin -p -h tf-db.chuu6jshlzzt.ap-northeast-2.rds.amazonaws.com
 It12345!
 
 use BBS;
+create table user(
+userID varchar(20) not null,
+userPassword varchar(20) not null,
+userName varchar(20) not null,
+userGender varchar(20) not null,
+userEmail varchar(20) not null,
+primary key(userID));
+
