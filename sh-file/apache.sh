@@ -41,7 +41,7 @@ sed -i '35d' /etc/yum.repos.d/mysql-community.repo
 sed -i '35i gpgcheck=0' /etc/yum.repos.d/mysql-community.repo 
 yum install -y mysql-community-client
 
-mysql -uadmin -p -h tf-db.chuu6jshlzzt.ap-northeast-2.rds.amazonaws.com
+mysql -uadmin -p -h db-endpoint
 It12345!
 
 use BBS;
