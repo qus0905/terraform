@@ -15,6 +15,7 @@ resource "aws_db_instance" "pro_rds" {
   backup_retention_period = 0
   skip_final_snapshot = true
   apply_immediately=true
+  parameter_group_name = "pro-para-group"
 
   tags={
     "Name"="tf_db"
