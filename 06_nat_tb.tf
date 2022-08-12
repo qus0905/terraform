@@ -5,6 +5,12 @@ resource "aws_route_table" "nat_table" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_nat_gateway.pro_ng.id
   }
+
+  route{
+    cidr_block = "3.0.0.0/24"
+    gateway_id = aws_vpn_gateway.pro_vpc_gateway.id
+   }
+
   tags = {
     "Name" = "Nat-table"
   }

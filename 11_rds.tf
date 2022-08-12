@@ -11,10 +11,11 @@ resource "aws_db_instance" "pro_rds" {
   password = "It12345!"
   availability_zone = "ap-northeast-2a"
   db_subnet_group_name = aws_db_subnet_group.tf_rdsg.id
-  vpc_security_group_ids = [aws_security_group.pro_sec.id]
+  vpc_security_group_ids = [aws_security_group.db-sg.id]
   backup_retention_period = 0
   skip_final_snapshot = true
   apply_immediately=true
+  parameter_group_name = "pro-para-group"
 
   tags={
     "Name"="tf_db"

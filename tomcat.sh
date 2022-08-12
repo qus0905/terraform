@@ -41,10 +41,10 @@ cd mysql-connector-java-8.0.30/
 sed -i '30a <Resource name="jdbc/db"'  /root/apache-tomcat-9.0.65/conf/context.xml
 sed -i '31a auth="Container"'  /root/apache-tomcat-9.0.65/conf/context.xml
 sed -i '32a type="javax.sql.DataSource"' /root/apache-tomcat-9.0.65/conf/context.xml
-sed -i '33a username="admin"'  /root/apache-tomcat-9.0.65/conf/context.xml
+sed -i '33a username="root"'  /root/apache-tomcat-9.0.65/conf/context.xml
 sed -i '34a password="It12345!"'  /root/apache-tomcat-9.0.65/conf/context.xml
 sed -i '35a driverClassName="com.mysql.jdbc.Driver"'  /root/apache-tomcat-9.0.65/conf/context.xml
-sed -i '36a url="jdbc:mysql://tf-db.chuu6jshlzzt.ap-northeast-2.rds.amazonaws.com:3306/BBS"'  /root/apache-tomcat-9.0.65/conf/context.xml
+sed -i '36a url="jdbc:mysql://3.0.0.1:3306/BBS"'  /root/apache-tomcat-9.0.65/conf/context.xml
 sed -i '37a maxActive="15"'  /root/apache-tomcat-9.0.65/conf/context.xml
 sed -i '38a maxIdle="3"/>'  /root/apache-tomcat-9.0.65/conf/context.xml
 
@@ -63,9 +63,9 @@ cat > index.jsp << EOF
 
   try{
         Class.forName("com.mysql.jdbc.Driver");
-        String url = "jdbc:mysql://tf-db.chuu6jshlzzt.ap-northeast-2.rds.amazonaws.com:3306/BBS";
+        String url = "jdbc:mysql://3.0.0.1:3306/BBS?serverTimezone=UTC";
 
-        Connection conn = DriverManager.getConnection(url, "admin", "It12345!");
+        Connection conn = DriverManager.getConnection(url, "root", "It12345!");
 
         out.print("Success!");
 

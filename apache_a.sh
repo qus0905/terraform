@@ -41,7 +41,10 @@ sed -i '35d' /etc/yum.repos.d/mysql-community.repo
 sed -i '35i gpgcheck=0' /etc/yum.repos.d/mysql-community.repo 
 yum install -y mysql-community-client
 
-mysql -uadmin -p -h tf-db.chuu6jshlzzt.ap-northeast-2.rds.amazonaws.com
-It12345!
-
-use BBS;
+cat > /var/www/html/index.html << EOF
+<html>
+<body>
+<h1> jybyun's Terraform Server-a for health-check</h1>
+</body>
+</html>
+EOF
