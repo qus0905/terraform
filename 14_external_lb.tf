@@ -10,16 +10,6 @@ resource "aws_lb" "pro_external_lb" {
   }
 }
 
-resource "aws_lb_listener" "pro_frontend" {
-  load_balancer_arn = aws_lb.pro_external_lb.arn
-  port = 80
-  protocol = "HTTP"
-
-  default_action {
-    type="forward"
-    target_group_arn=aws_lb_target_group.pro_target.arn
-  }
-}
 resource "aws_lb_target_group" "pro_target" {
   name = "pro-target"
   port = 80
@@ -36,6 +26,17 @@ resource "aws_lb_target_group" "pro_target" {
     protocol            = "HTTP"
     timeout             = 2
     unhealthy_threshold = 3
+  }
+}
+
+resource "aws_lb_listener" "pro_frontend" {
+  load_balancer_arn = aws_lb.pro_external_lb.arn
+  port = 80
+  protocol = "HTTP"
+
+  default_action {
+    type="forward"
+    target_group_arn=aws_lb_target_group.pro_target.arn
   }
 }
 

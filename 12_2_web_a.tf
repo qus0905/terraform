@@ -1,10 +1,12 @@
-resource "aws_launch_configuration" "web_launch_conf" {
-  name = "web-launch_conf"
-  image_id = aws_ami_from_instance.web_ami.id
+resource "aws_instance" "web-a" {
+ ami= "ami-0e1d09d8b7c751816"
   instance_type = "t2.micro"
-  iam_instance_profile = "admin_role"
-  security_groups = [aws_security_group.web-sg.id]
   key_name = "jybyun"
+  vpc_security_group_ids = [aws_security_group.web-sg.id]
+  availability_zone = "ap-northeast-2a"
+  subnet_id = aws_subnet.weba.id
+  private_ip = "12.0.0.10"
+  associate_public_ip_address = true
   user_data = <<-EOF
                 #! /bin/bash
                 sudo su -
@@ -36,21 +38,18 @@ resource "aws_launch_configuration" "web_launch_conf" {
                     cat > /var/www/html/index.html << EOF
                     <html>
                         <body>
-                        <h1> jybyun's Terraform Server-c for health-check</h1>
+                        <h1> jybyun's Terraform Server-a for health-check</h1>
                         </body>
                     </html> 
             EOF
 
+  
+  tags = {
+    "Name" = "tf_web_a"
+  }
 }
 
-resource "aws_launch_configuration" "was_launch_conf" {
-  name = "was-launch-conf"
-  image_id = aws_ami_from_instance.was_ami.id
-  instance_type = "t2.micro"
-  iam_instance_profile = "admin_role"
-  security_groups = [aws_security_group.was-sg.id]
-  key_name = "jybyun"
-  user_data= file("./tomcat.sh")
-
-
+output "public_ip_a" {
+    value = aws_instance.web-a.public_ip
+  
 }
