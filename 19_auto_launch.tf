@@ -41,6 +41,9 @@ resource "aws_launch_configuration" "web_launch_conf" {
                     </html> 
             EOF
 
+depends_on = [
+  aws_ami_from_instance.web_ami
+]
 }
 
 resource "aws_launch_configuration" "was_launch_conf" {
@@ -52,5 +55,7 @@ resource "aws_launch_configuration" "was_launch_conf" {
   key_name = "jybyun"
   user_data= file("./tomcat.sh")
 
-
+  depends_on = [
+    aws_ami_from_instance.was_ami
+  ]
 }
