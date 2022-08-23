@@ -5,8 +5,7 @@ resource "aws_instance" "web-a" {
   vpc_security_group_ids = [aws_security_group.web-sg.id]
   availability_zone = "ap-northeast-2a"
   subnet_id = aws_subnet.weba.id
-  private_ip = "12.0.0.10"
-  associate_public_ip_address = true
+  private_ip = "12.0.2.10"
   user_data = <<-EOF
                 #! /bin/bash
                 sudo su -
@@ -47,9 +46,4 @@ resource "aws_instance" "web-a" {
   tags = {
     "Name" = "tf_web_a"
   }
-}
-
-output "public_ip_a" {
-    value = aws_instance.web-a.public_ip
-  
 }

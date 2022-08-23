@@ -4,25 +4,25 @@ resource "aws_route53_zone" "jybyun" {
 
 resource "aws_route53_record" "frontend_www" {
   zone_id = "${aws_route53_zone.jybyun.zone_id}"
-  type = "A"
-  name = "www.jybyun.xyz"
+  name="${var.www_domain_name}"
+  type="A"
   
   alias{
-    evaluate_target_health = true
-    name = aws_lb.pro_external_lb.dns_name
-    zone_id = "${aws_lb.pro_external_lb.zone_id}"
+   evaluate_target_health = false
+    name = aws_cloudfront_distribution.pro_cf.domain_name
+    zone_id = "${aws_cloudfront_distribution.pro_cf.hosted_zone_id}"
   }    
   
 }
-resource "aws_route53_record" "frontend_A" {
+resource "aws_route53_record" "frontend_root" {
   zone_id = "${aws_route53_zone.jybyun.zone_id}"
   type = "A"
-  name = "jybyun.xyz"
+  name = "${var.root_domain_name}"
   
   alias{
-    evaluate_target_health = true
-    name = aws_lb.pro_external_lb.dns_name
-    zone_id = "${aws_lb.pro_external_lb.zone_id}"
+    evaluate_target_health = false
+     name = aws_cloudfront_distribution.pro_cf.domain_name
+    zone_id = "${aws_cloudfront_distribution.pro_cf.hosted_zone_id}"
   }    
   
 }

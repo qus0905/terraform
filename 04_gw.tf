@@ -14,7 +14,7 @@ resource "aws_eip" "pro_eip" {
 
 resource "aws_nat_gateway" "pro_ng" {
   allocation_id = aws_eip.pro_eip.id
-  subnet_id = aws_subnet.weba.id
+  subnet_id = aws_subnet.public_sub.id
 
   tags = {
     "Name" = "pro-nat-gw"

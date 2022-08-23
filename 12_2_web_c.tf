@@ -5,8 +5,7 @@ resource "aws_instance" "web-c" {
   vpc_security_group_ids = [aws_security_group.web-sg.id]
   availability_zone = "ap-northeast-2c"
   subnet_id = aws_subnet.webc.id
-  private_ip = "12.0.1.10"
-  associate_public_ip_address = true
+  private_ip = "12.0.3.10"
   user_data = <<-EOF
                 #! /bin/bash
                 sudo su -
@@ -49,7 +48,3 @@ resource "aws_instance" "web-c" {
   }
 }
 
-output "public_ip_c" {
-    value = aws_instance.web-c.public_ip
-  
-}

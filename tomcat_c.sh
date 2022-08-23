@@ -62,7 +62,7 @@ try{
 Class.forName("com.mysql.jdbc.Driver");
 String url = "jdbc:mysql://tf-db.chuu6jshlzzt.ap-northeast-2.rds.amazonaws.com:3306/BBS";
 Connection conn = DriverManager.getConnection(url, "admin", "It12345!");
-out.print("Success from a");
+out.print("Success from c");
 }
  catch(Exception e){
 out.print(e.toString());
@@ -73,7 +73,7 @@ EOF
 cat > index.html << EOF
 <html>
 <body>
-<h1> jybyun's Terraform Server-a for health-check</h1>
+<h1> jybyun's Terraform Server-c for health-check</h1>
 </body>
 </html> 
 EOF

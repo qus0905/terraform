@@ -5,7 +5,7 @@ resource "aws_instance" "was-c" {
   vpc_security_group_ids = [aws_security_group.was-sg.id]
   availability_zone = "ap-northeast-2c"
   subnet_id = aws_subnet.wasc.id
-  private_ip = "12.0.3.10"
+  private_ip = "12.0.5.10"
   user_data=file("tomcat_c.sh")
   tags = {
     "Name" = "tf_was_c"

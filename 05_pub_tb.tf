@@ -9,20 +9,18 @@ resource "aws_route_table" "pub_table" {
    
    route{
     cidr_block = "3.0.0.0/24"
-    gateway_id = aws_vpn_gateway.pro_vpc_gateway.id
+    gateway_id = aws_vpn_gateway.pro_vpn_gateway.id
    }
    
   tags = {
     "Name" = "pub_table"
   }
 }
-
-resource "aws_route_table_association" "pub_1" {
-  subnet_id = aws_subnet.weba.id
+resource "aws_route_table_association" "public_route_1" {
+  subnet_id = aws_subnet.public_sub.id
   route_table_id = aws_route_table.pub_table.id
 }
-
-resource "aws_route_table_association" "pub_2" {
-  subnet_id = aws_subnet.webc.id
-  route_table_id = aws_route_table.pub_table.id 
+resource "aws_route_table_association" "public_route_2" {
+  subnet_id = aws_subnet.public_sub2.id
+  route_table_id = aws_route_table.pub_table.id
 }

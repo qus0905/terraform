@@ -16,7 +16,7 @@ resource "aws_ami_from_instance" "was_ami" {
   source_instance_id = aws_instance.was-a.id
 
   depends_on = [
-    aws_db_instance.pro_rds
+     aws_db_instance.pro_rds
   ]
   tags = {
     "Name" = "was-ami"

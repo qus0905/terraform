@@ -1,5 +1,5 @@
 
-resource "aws_vpn_gateway" "pro_vpc_gateway" {
+resource "aws_vpn_gateway" "pro_vpn_gateway" {
   vpc_id = aws_vpc.project_vpc.id
 
   tags = {
@@ -18,7 +18,7 @@ resource "aws_customer_gateway" "cus_ga" {
 }
 
 resource "aws_vpn_connection" "pro-vpn-conn" {
-  vpn_gateway_id = aws_vpn_gateway.pro_vpc_gateway.id
+  vpn_gateway_id = aws_vpn_gateway.pro_vpn_gateway.id
   customer_gateway_id = aws_customer_gateway.cus_ga.id
   type = "ipsec.1"
    static_routes_only  = true

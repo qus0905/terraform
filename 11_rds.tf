@@ -3,7 +3,7 @@ resource "aws_db_instance" "pro_rds" {
   max_allocated_storage = 80
   storage_type = "gp2"
   engine = "mysql"
-  engine_version = "5.7.21"
+  engine_version = "8.0.23"
   instance_class = "db.t2.micro"
   identifier= "tf-db"
   db_name="BBS"

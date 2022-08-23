@@ -2,7 +2,7 @@ resource "aws_lb" "pro_external_lb" {
   name="pro-external-lb"
   load_balancer_type = "application"
   internal = false
-  subnets= [aws_subnet.weba.id, aws_subnet.webc.id]
+  subnets= [aws_subnet.public_sub.id, aws_subnet.public_sub2.id]
   security_groups = [aws_security_group.elb-sg.id]
 
   tags={

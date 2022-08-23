@@ -4,12 +4,22 @@ resource "aws_security_group" "db-sg" {
   vpc_id = aws_vpc.project_vpc.id
 
  ingress {
-    description      = "SSH"
-    from_port        = 22
-    to_port          = 22
+  description = "SSH"
+  from_port = 22
+  to_port = 22
+  protocol = "tcp"
+  prefix_list_ids = null
+  security_groups = [aws_security_group.bastion_sg.id]
+  self = null
+  
+ }
+ ingress {
+    description      = "DB"
+    from_port        = 3306
+    to_port          = 3306
     protocol         = "tcp"
-    security_groups = [aws_security_group.web-sg.id]
     prefix_list_ids  = null
+    security_groups  = [aws_security_group.web-sg.id]
     self             = null
     }
 
@@ -47,6 +57,8 @@ resource "aws_security_group" "db-sg" {
 
     }
   ]
+
+
  tags = {
    "Name" = "DB-SG"
  }
