@@ -6,7 +6,7 @@ resource "aws_db_instance" "pro_rds" {
   engine_version = "8.0.23"
   instance_class = "db.t2.micro"
   identifier= "tf-db"
-  db_name="BBS"
+  db_name="member"
   username = "admin"
   password = "It12345!"
   availability_zone = "ap-northeast-2a"

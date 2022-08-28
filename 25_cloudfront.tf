@@ -40,12 +40,15 @@ resource "aws_cloudfront_distribution" "pro_cf" {
 
   }
   enabled = true
-
+  default_root_object ="/Musteat"
+  is_ipv6_enabled = true
+  aliases = ["jybyun.xyz", "www.jybyun.xyz"]
+  
   default_cache_behavior {
     target_origin_id="main-elb"
     compress = true
     viewer_protocol_policy = "allow-all"
-     allowed_methods        = ["GET", "HEAD"]
+     allowed_methods        = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods         = ["GET", "HEAD"]
     
     forwarded_values {
@@ -82,7 +85,10 @@ resource "aws_cloudfront_distribution" "pro_cf" {
   }
    viewer_certificate{
       cloudfront_default_certificate = true
+      ssl_support_method = "sni-only"
+      acm_certificate_arn = "arn:aws:acm:us-east-1:845480526715:certificate/1892e3bf-4fa7-4c3a-bd3d-cc26509e8eb2"
   }
+
   tags = {
     Environment="pro-cdn"
   }

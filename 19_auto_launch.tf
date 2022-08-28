@@ -1,11 +1,11 @@
 resource "aws_launch_configuration" "web_launch_conf" {
-  name = "web-launch_conf"
-  image_id = aws_ami_from_instance.web_ami.id
-  instance_type = "t2.micro"
+  name                 = "web-launch_conf"
+  image_id             = aws_ami_from_instance.web_ami.id
+  instance_type        = "t2.micro"
   iam_instance_profile = "admin_role"
-  security_groups = [aws_security_group.web-sg.id]
-  key_name = "jybyun"
-  user_data = <<-EOF
+  security_groups      = [aws_security_group.web-sg.id]
+  key_name             = "jybyun"
+  user_data            = <<-EOF
                 #! /bin/bash
                 sudo su -
                 yum -y update
@@ -41,19 +41,19 @@ resource "aws_launch_configuration" "web_launch_conf" {
                     </html> 
             EOF
 
-depends_on = [
-  aws_ami_from_instance.web_ami
-]
+  depends_on = [
+    aws_ami_from_instance.web_ami
+  ]
 }
 
 resource "aws_launch_configuration" "was_launch_conf" {
-  name = "was-launch-conf"
-  image_id = aws_ami_from_instance.was_ami.id
-  instance_type = "t2.micro"
+  name                 = "was-launch-conf"
+  image_id             = aws_ami_from_instance.was_ami.id
+  instance_type        = "t2.micro"
   iam_instance_profile = "admin_role"
-  security_groups = [aws_security_group.was-sg.id]
-  key_name = "jybyun"
-  user_data= file("./tomcat.sh")
+  security_groups      = [aws_security_group.was-sg.id]
+  key_name             = "jybyun"
+  user_data            = file("./tomcat.sh")
 
   depends_on = [
     aws_ami_from_instance.was_ami
