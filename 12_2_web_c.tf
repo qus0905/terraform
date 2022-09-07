@@ -16,11 +16,6 @@ resource "aws_instance" "web-c" {
                 systemctl enable httpd
 
                 cd~
-                yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
-                yum -y install http://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
-                sed -i '35d' /etc/yum.repos.d/mysql-community.repo 
-                sed -i '35i gpgcheck=0' /etc/yum.repos.d/mysql-community.repo 
-                yum install -y mysql-community-client
 
                     sed -i '362a <VirtualHost *:80>'  /etc/httpd/conf/httpd.conf
                     sed -i '363a ProxyRequests Off '  /etc/httpd/conf/httpd.conf

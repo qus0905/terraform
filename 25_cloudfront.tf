@@ -47,7 +47,7 @@ resource "aws_cloudfront_distribution" "pro_cf" {
   default_cache_behavior {
     target_origin_id="main-elb"
     compress = true
-    viewer_protocol_policy = "allow-all"
+    viewer_protocol_policy = "redirect-to-https"
      allowed_methods        = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods         = ["GET", "HEAD"]
     
@@ -65,7 +65,7 @@ resource "aws_cloudfront_distribution" "pro_cf" {
     path_pattern = "/error.html"
     target_origin_id="error-s3"
     compress=true
-    viewer_protocol_policy = "allow-all"
+    viewer_protocol_policy = "redirect-to-https"
     allowed_methods        = ["GET", "HEAD"]
     cached_methods         = ["GET", "HEAD"]
     
@@ -97,7 +97,7 @@ resource "aws_cloudfront_distribution" "pro_cf" {
 
     error_caching_min_ttl = 10
     error_code = 502
-    response_code = 502
+    response_code = 503
     response_page_path = "/error.html"
 
   }

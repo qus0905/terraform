@@ -4,17 +4,28 @@ resource "aws_security_group" "db-sg" {
   vpc_id = aws_vpc.project_vpc.id
 
  ingress {
-  description = "SSH"
-  from_port = 22
-  to_port = 22
-  protocol = "tcp"
-  prefix_list_ids = null
-  security_groups = [aws_security_group.bastion_sg.id]
-  self = null
-  
- }
+    description      = "bastion-SSH"
+    from_port        = 22
+    to_port          = 22
+    protocol         = "tcp"
+    prefix_list_ids  = null
+    security_groups  = [aws_security_group.bastion_sg.id]
+    self             = null
+    }
+
+     ingress {
+    description      = "bastion-DB"
+    from_port        = 3306
+    to_port          = 3306
+    protocol         = "tcp"
+    prefix_list_ids  = null
+    security_groups  = [aws_security_group.bastion_sg.id]
+    self             = null
+    }
+ 
+ 
  ingress {
-    description      = "DB"
+    description      = "Master-DB"
     from_port        = 3306
     to_port          = 3306
     protocol         = "tcp"
@@ -24,9 +35,20 @@ resource "aws_security_group" "db-sg" {
     self             = null
   
     }
+    ingress {
+    description      = "Master-DB"
+    from_port        = 3306
+    to_port          = 3306
+    protocol         = "tcp"
+    cidr_blocks      = ["12.0.6.0/24"]
+    prefix_list_ids  = null
+    security_groups  = null
+    self             = null
+  
+    }
 
   ingress {
-    description      = "DB"
+    description      = "WAS-DB"
     from_port        = 3306
     to_port          = 3306
     protocol         = "tcp"
@@ -35,7 +57,7 @@ resource "aws_security_group" "db-sg" {
     self             = null
     }
      ingress {
-    description      = "DB"
+    description      = "Onpre-DB"
     from_port        = 3306
     to_port          = 3306
     protocol         = "tcp"
@@ -60,7 +82,9 @@ resource "aws_security_group" "db-sg" {
     }
   ]
 
-
+ depends_on = [
+   aws_security_group.bastion_sg
+ ]
  tags = {
    "Name" = "DB-SG"
  }

@@ -33,6 +33,15 @@ resource "aws_security_group" "web-sg" {
     security_groups  = [aws_security_group.elb-sg.id]
     self             = null
     }
+      ingress {
+    description      = "HTTPS"
+    from_port        = 443
+    to_port          = 443
+    protocol         = "tcp"
+    prefix_list_ids  = null
+    security_groups  = [aws_security_group.elb-sg.id]
+    self             = null
+    }
     
  egress = [
     {
